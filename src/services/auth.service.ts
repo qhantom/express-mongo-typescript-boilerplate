@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import createHttpError from 'http-errors'
 import { fromUnixTime } from 'date-fns'
 
 import { config } from '../configs'
@@ -8,8 +9,7 @@ import { tokenService } from './'
 
 async function register(user: userTypes.User): Promise<userTypes.UserDocument> {
   if (await User.doesEmailExist(user.email)) {
-    console.log('Email is already taken')
-    return
+    throw createHttpError(400, 'Email address already exist')
   }
 
   const createdUser = await User.create(user)
@@ -22,7 +22,7 @@ async function login(
   const user = await User.findOne({ email: credentials.email })
 
   if (user === null || !(await user.doesPasswordMatch(credentials.password))) {
-    console.log('No user found')
+    throw createHttpError(400, 'Email or password incorrect')
   } else {
     return tokenService.createToken(user)
   }
@@ -32,8 +32,7 @@ async function logout(user: userTypes.User, token: string) {
   const userDocument = await User.findOne({ email: user.email })
 
   if (!userDocument) {
-    console.log('User does not exist')
-    return
+    throw createHttpError(400, 'User does not exist')
   }
 
   const payload = jwt.verify(
