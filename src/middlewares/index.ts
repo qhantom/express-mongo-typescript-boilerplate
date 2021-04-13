@@ -1,0 +1,1 @@
+export { isAuthenticated } from './isAuthenticated'
