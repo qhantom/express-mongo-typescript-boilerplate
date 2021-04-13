@@ -2,14 +2,14 @@ import mongoose, { NativeError } from 'mongoose'
 
 import { app } from './app'
 
-import { config } from './configs/config'
+import { config } from './configs'
 
 mongoose.connect(
   config.database.URI,
   config.database.options,
   (err: NativeError) => {
     if (err) {
-      console.log(err)
+      console.log('Database Error', err)
     } else {
       console.log('Database connected')
 
