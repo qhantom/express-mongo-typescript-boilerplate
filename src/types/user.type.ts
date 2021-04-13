@@ -5,6 +5,8 @@ interface User {
   password: string
 }
 
-type UserDocument = User & Document
+interface UserDocument extends User, Document {
+  doesPasswordMatch: (password: string) => Promise<boolean>
+}
 
 export { User, UserDocument }
