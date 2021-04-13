@@ -1,6 +1,8 @@
-import express from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import passport from 'passport'
-import { strategy } from './configs'
+import createHttpError, { HttpError } from 'http-errors'
+
+import { config, strategy } from './configs'
 
 const app = express()
 
@@ -13,5 +15,19 @@ passport.use('jwt', strategy)
 
 // ROUTES
 app.use('/v1', routes)
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  next(createHttpError(404))
+})
+
+app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
+  const { status = 500, message, stack } = err
+
+  res.status(status).json({
+    status,
+    message,
+    stack: config.environment === 'production' ? null : stack,
+  })
+})
 
 export { app }
