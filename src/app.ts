@@ -4,6 +4,8 @@ import createHttpError, { HttpError } from 'http-errors'
 
 import { config, strategy } from './configs'
 
+import { authLimiter } from './middlewares'
+
 import { router as routes } from './routes/v1'
 
 const app = express()
@@ -12,6 +14,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 passport.use('jwt', strategy)
+
+if (config.environment === 'production') {
+  app.use('/v1/auth', authLimiter)
+}
 
 // ROUTES
 app.use('/v1', routes)
