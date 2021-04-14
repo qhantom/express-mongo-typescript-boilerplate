@@ -4,7 +4,8 @@
   "description": "This is an ExpressJS boilerplate written in TypeScript with MongoDB.",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "@types/passport-jwt": "^3.0.5",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "husky": "^6.0.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
