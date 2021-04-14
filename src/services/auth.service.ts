@@ -17,7 +17,7 @@ async function register(user: userTypes.User): Promise<userTypes.UserDocument> {
 }
 
 async function login(
-  credentials: userTypes.User
+  credentials: userTypes.User,
 ): Promise<tokenTypes.TokenResponse> {
   const user = await User.findOne({ email: credentials.email })
 
@@ -37,13 +37,13 @@ async function logout(user: userTypes.User, token: string) {
 
   const payload = jwt.verify(
     token.split(' ')[1],
-    config.jwt.secret
+    config.jwt.secret,
   ) as tokenTypes.Payload
 
   await tokenService.invalidateToken(
     userDocument,
     token.split(' ')[1],
-    fromUnixTime(payload.exp)
+    fromUnixTime(payload.exp),
   )
 
   return
