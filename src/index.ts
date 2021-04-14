@@ -17,5 +17,5 @@ mongoose.connect(
         console.log(`Server started in port ${config.server.port}`)
       })
     }
-  }
+  },
 )
