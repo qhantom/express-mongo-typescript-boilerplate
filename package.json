@@ -4,8 +4,7 @@
   "description": "This is an ExpressJS boilerplate written in TypeScript with MongoDB.",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon",
-    "prepare": "husky install"
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -16,17 +15,22 @@
   "bugs": {
     "url": "https://gitlab.com/qhantom/express-mongo-typescript-boilerplate/issues"
   },
+  "npx": {
+    "noInstall": true
+  },
   "homepage": "https://gitlab.com/qhantom/express-mongo-typescript-boilerplate#readme",
   "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.11",
     "@types/http-errors": "^1.8.0",
     "@types/passport": "^1.0.6",
     "@types/passport-jwt": "^3.0.5",
+    "husky": "^6.0.0",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3",
-    "husky": "^6.0.0"
+    "typescript": "^4.2.3"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
