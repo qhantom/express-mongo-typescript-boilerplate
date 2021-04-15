@@ -45,8 +45,6 @@ async function logout(user: userTypes.User, token: string) {
     token.split(' ')[1],
     fromUnixTime(payload.exp),
   )
-
-  return
 }
 
 export { register, login, logout }
