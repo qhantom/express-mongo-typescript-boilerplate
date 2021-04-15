@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }))
 
 passport.use('jwt', strategy)
 
-if (config.environment !== 'development') {
+if (config.environment === 'production') {
   app.use('/v1/auth', authLimiter)
 }
 
