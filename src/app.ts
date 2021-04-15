@@ -25,7 +25,6 @@ if (config.environment !== 'development') {
   app.use('/v1/auth', authLimiter)
 }
 
-// ROUTES
 app.use('/v1', routes)
 
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -37,11 +36,16 @@ app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
 
   res.locals.errorMessage = message
 
-  res.status(status).json({
+  const response: { status: number; message: string; stack?: string } = {
     status,
     message,
-    stack: config.environment === 'development' ? stack : null,
-  })
+  }
+
+  if (config.environment === 'development') {
+    response.stack = stack
+  }
+
+  res.status(status).json(response)
 })
 
 export { app }
