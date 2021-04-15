@@ -1,7 +1,7 @@
 import express from 'express'
-const router = express.Router()
-
 import { authRoutes } from './auth.route'
+
+const router = express.Router()
 
 const routes = [
   {
@@ -10,8 +10,8 @@ const routes = [
   },
 ]
 
-for (const route of routes) {
+routes.forEach((route) => {
   router.use(route.path, route.routes)
-}
+})
 
 export { router }
