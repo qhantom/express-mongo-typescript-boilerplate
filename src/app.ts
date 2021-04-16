@@ -6,7 +6,7 @@ import compression from 'compression'
 
 import { config, strategy, successHandler, errorHandler } from './configs'
 
-import { authLimiter } from './middlewares'
+import { generalRateLimiter } from './middlewares'
 
 import { router as routes } from './routes/v1'
 
@@ -25,7 +25,7 @@ app.use(compression())
 passport.use('jwt', strategy)
 
 if (config.environment === 'production') {
-  app.use('/v1/auth', authLimiter)
+  app.use(generalRateLimiter)
 }
 
 app.use('/v1', routes)
