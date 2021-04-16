@@ -5,7 +5,7 @@ import { fromUnixTime } from 'date-fns'
 import { config } from '../configs'
 import { User } from '../models'
 import { tokenTypes, userTypes } from '../types'
-import { tokenService } from './'
+import { createToken, invalidateToken } from './token.service'
 
 async function register(user: userTypes.User): Promise<userTypes.UserDocument> {
   if (await User.doesEmailExist(user.email)) {
@@ -24,7 +24,7 @@ async function login(
   if (user === null || !(await user.doesPasswordMatch(credentials.password))) {
     throw createHttpError(400, 'Email or password incorrect')
   } else {
-    return tokenService.createToken(user)
+    return createToken(user)
   }
 }
 
@@ -40,7 +40,7 @@ async function logout(user: userTypes.User, token: string) {
     config.jwt.secret,
   ) as tokenTypes.Payload
 
-  await tokenService.invalidateToken(
+  await invalidateToken(
     userDocument,
     token.split(' ')[1],
     fromUnixTime(payload.exp),
