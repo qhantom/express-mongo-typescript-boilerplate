@@ -1,8 +1,11 @@
+import http from 'http'
 import mongoose, { NativeError } from 'mongoose'
 
 import { app } from './app'
 
 import { config, logger } from './configs'
+
+let server: http.Server
 
 mongoose.connect(
   config.database.URI,
@@ -13,9 +16,35 @@ mongoose.connect(
     } else {
       logger.info('Database connected')
 
-      app.listen(config.server.port, () => {
+      server = app.listen(config.server.port, () => {
         logger.info(`Server started on port ${config.server.port}`)
       })
     }
   },
 )
+
+const exitHandler = () => {
+  if (server) {
+    server.close(() => {
+      logger.info('Server closed')
+      process.exit(1)
+    })
+  } else {
+    process.exit(1)
+  }
+}
+
+const unexpectedErrorHandler = (error: Error) => {
+  logger.error(error)
+  exitHandler()
+}
+
+process.on('uncaughtException', unexpectedErrorHandler)
+process.on('unhandledRejection', unexpectedErrorHandler)
+
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM received')
+  if (server) {
+    server.close()
+  }
+})
