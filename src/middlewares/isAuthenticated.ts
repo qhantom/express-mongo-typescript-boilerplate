@@ -10,7 +10,7 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
     { session: false },
     async (error, payload, info) => {
       if (error || !payload || info) {
-        next(createHttpError(400, error || info))
+        next(createHttpError(401, error || info))
       }
 
       const token = await findToken(req.headers.authorization.split(' ')[1])
@@ -20,7 +20,7 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
       }
 
       next()
-    }
+    },
   )(req, res, next)
 }
 
