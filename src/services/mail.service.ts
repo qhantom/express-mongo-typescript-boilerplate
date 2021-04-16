@@ -6,7 +6,7 @@ const transport = nodemailer.createTransport(config.mail as TransportOptions)
 
 transport
   .verify()
-  .then(() => logger.info('Connect to SMTP server'))
+  .then(() => logger.info('SMTP server connected'))
   .catch(() => logger.warn('Unable to connect to SMTP server'))
 
 async function sendMail(to: string, subject: string, text: string) {
