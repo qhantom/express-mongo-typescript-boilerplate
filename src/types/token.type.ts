@@ -1,13 +1,14 @@
 import { Document } from 'mongoose'
 
+type BearerToken = string
 interface Token {
-  token: string
+  token: BearerToken
   user: string
   expirationDate: string
 }
 
 interface TokenResponse {
-  token: string
+  token: BearerToken
   expirationDate: Date
 }
 
@@ -20,4 +21,4 @@ interface Payload {
   issuer: string
 }
 
-export { Token, TokenDocument, TokenResponse, Payload }
+export { Token, TokenDocument, TokenResponse, Payload, BearerToken }
