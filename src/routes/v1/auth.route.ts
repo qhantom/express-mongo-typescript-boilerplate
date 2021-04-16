@@ -10,6 +10,7 @@ import {
 import { authController } from '../../controllers'
 
 const router = express.Router()
+
 router.post(
   '/register',
   registerValidator(),
