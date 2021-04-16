@@ -9,7 +9,7 @@ import { createToken, invalidateToken } from './token.service'
 
 async function register(user: userTypes.User): Promise<userTypes.UserDocument> {
   if (await User.doesEmailExist(user.email)) {
-    throw createHttpError(400, 'Email address already exist')
+    throw createHttpError(400, 'Email already exist')
   }
 
   const createdUser = await User.create(user)
@@ -22,29 +22,27 @@ async function login(
   const user = await User.findOne({ email: credentials.email })
 
   if (user === null || !(await user.doesPasswordMatch(credentials.password))) {
-    throw createHttpError(400, 'Email or password incorrect')
+    throw createHttpError(401, 'Email or password incorrect')
   } else {
     return createToken(user)
   }
 }
 
-async function logout(user: userTypes.User, token: string) {
+async function logout(user: userTypes.User, token: tokenTypes.BearerToken) {
   const userDocument = await User.findOne({ email: user.email })
 
   if (!userDocument) {
-    throw createHttpError(400, 'User does not exist')
+    throw createHttpError(404, 'User does not exist')
   }
 
+  const extractedToken = token.split(' ')[1]
+
   const payload = jwt.verify(
-    token.split(' ')[1],
+    extractedToken,
     config.jwt.secret,
   ) as tokenTypes.Payload
 
-  await invalidateToken(
-    userDocument,
-    token.split(' ')[1],
-    fromUnixTime(payload.exp),
-  )
+  await invalidateToken(userDocument, extractedToken, fromUnixTime(payload.exp))
 }
 
 export { register, login, logout }
