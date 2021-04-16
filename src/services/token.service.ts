@@ -7,8 +7,8 @@ import { tokenTypes, userTypes } from '../types'
 
 function invalidateToken(
   user: userTypes.UserDocument,
-  token: string,
-  expirationDate: Date
+  token: tokenTypes.BearerToken,
+  expirationDate: Date,
 ): Promise<tokenTypes.TokenDocument> {
   return Token.create({
     token,
@@ -17,18 +17,18 @@ function invalidateToken(
   })
 }
 
-function findToken(token: string) {
+function findToken(token: tokenTypes.BearerToken) {
   return Token.findOne({
     token,
   })
 }
 
 async function createToken(
-  user: userTypes.UserDocument
+  user: userTypes.UserDocument,
 ): Promise<tokenTypes.TokenResponse> {
   const expirationDate = addHours(
     new Date(),
-    Number(process.env.JWT_EXPIRATION_HOURS)
+    Number(config.jwt.expirationHours),
   )
 
   const payload: tokenTypes.Payload = {
@@ -36,7 +36,7 @@ async function createToken(
     iat: Math.floor(Date.now() / 1000),
     exp:
       Math.floor(Date.now() / 1000) +
-      60 * 60 * Number(process.env.JWT_EXPIRATION_HOURS), // 24 h
+      60 * 60 * Number(config.jwt.expirationHours), // 24 h
     issuer: 'Boilerplate',
   }
 
