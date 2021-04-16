@@ -26,7 +26,7 @@ function validate(req: Request, res: Response, next: NextFunction) {
     .array()
     .map((error) => ({ [error.param]: error.msg }))
 
-  return res.status(400).json({ errors: sanitizedErrors })
+  return res.status(400).json({ validationErrors: sanitizedErrors })
 }
 
 export { validate, registerValidator, loginValidator }
