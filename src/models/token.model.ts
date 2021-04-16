@@ -1,4 +1,4 @@
-import { Schema, model, Model, SchemaTypes, Document } from 'mongoose'
+import { Schema, model, Model, SchemaTypes } from 'mongoose'
 
 import { tokenTypes } from '../types'
 
@@ -21,7 +21,7 @@ const tokenSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 const Token: Model<tokenTypes.TokenDocument> = model('Token', tokenSchema)
