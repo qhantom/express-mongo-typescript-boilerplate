@@ -16,14 +16,18 @@ const options: StrategyOptions = {
 
 async function verifyJwt(
   payload: tokenTypes.Payload,
-  done: VerifiedCallback
+  done: VerifiedCallback,
 ): Promise<void> {
   try {
     const user = await User.findOne({ email: payload.sub })
 
-    done(null, user)
+    if (!user) {
+      done(null, false)
+    } else {
+      done(null, user)
+    }
   } catch (error) {
-    done(error, null)
+    done(error, false)
   }
 }
 
