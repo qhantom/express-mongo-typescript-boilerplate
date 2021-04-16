@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express'
 import passport from 'passport'
 import createHttpError, { HttpError } from 'http-errors'
 import helmet from 'helmet'
+import compression from 'compression'
 
 import { config, strategy, successHandler, errorHandler } from './configs'
 
@@ -18,6 +19,8 @@ app.use(helmet())
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(compression())
 
 passport.use('jwt', strategy)
 
