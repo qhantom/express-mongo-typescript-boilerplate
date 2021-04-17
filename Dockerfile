@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:15.14.0-alpine
 
 WORKDIR /usr/src/app
 
@@ -10,6 +10,6 @@ COPY ./dist .
 COPY ./ecosystem.config.json .
 COPY ./.env .
 
-EXPOSE 3000
+USER node
 
 CMD ["npm", "start"]
