@@ -5,11 +5,7 @@
       "script": "index.js",
       "instances": 1,
       "autorestart": true,
-      "time": true,
-      "node_args": "-r dotenv/config",
-      "env": {
-        "NODE_ENV": "production"
-      }
+      "time": true
     }
   ]
 }
