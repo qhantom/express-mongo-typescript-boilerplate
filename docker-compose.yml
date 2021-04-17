@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  node-app:
+    image: node-app
+    stdin_open: true
+    depends_on:
+      - mongo
+    ports:
+      - 3000:3000
+    networks:
+      - boilerplate
+    volumes:
+      - node-logs:/usr/src/app/logs
+  mongo:
+    image: mongo:4.4.5-bionic
+    ports:
+      - 27017:27017
+    networks:
+      - boilerplate
+    volumes:
+      - mongo-data:/data/db
+networks:
+  boilerplate:
+    driver: bridge
+volumes:
+  node-logs:
+    driver: local
+  mongo-data:
+    driver: local
