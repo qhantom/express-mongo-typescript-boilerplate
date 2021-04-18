@@ -9,3 +9,9 @@ LICENSE
 Dockerfile*
 docker-compose*
 .dockerignore
+.husky
+.commitlintrc.json
+.prettierrc.json
+nodemon.json
+.eslintrc.json
+.env*
