@@ -4,7 +4,7 @@ type BearerToken = string
 interface Token {
   token: BearerToken
   user: string
-  expirationDate: string
+  expirationDate: Date
 }
 
 interface TokenResponse {
