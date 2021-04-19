@@ -26,7 +26,7 @@ function findToken(token: tokenTypes.BearerToken) {
 async function createToken(
   user: userTypes.UserDocument,
 ): Promise<tokenTypes.TokenResponse> {
-  const expirationDate = addHours(
+  const expirationDate: Date = addHours(
     new Date(),
     Number(config.jwt.expirationHours),
   )
@@ -37,10 +37,10 @@ async function createToken(
     exp:
       Math.floor(Date.now() / 1000) +
       60 * 60 * Number(config.jwt.expirationHours), // 24 h
-    issuer: 'Boilerplate',
+    issuer: config.jwt.issuer,
   }
 
-  const token = jwt.sign(payload, config.jwt.secret)
+  const token: tokenTypes.BearerToken = jwt.sign(payload, config.jwt.secret)
 
   return {
     token,
