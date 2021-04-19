@@ -1,4 +1,5 @@
 import cron from 'node-cron'
+
 import { logger } from './logger'
 
 // https://github.com/node-cron/node-cron/blob/master/README.md
