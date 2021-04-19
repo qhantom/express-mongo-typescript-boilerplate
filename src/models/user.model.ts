@@ -27,6 +27,7 @@ const userSchema: Schema<userTypes.UserDocument> = new Schema(
   },
 )
 
+/* eslint-disable-next-line func-names */
 userSchema.statics.doesEmailExist = async function (
   email: userTypes.UserEmail,
 ): Promise<boolean> {
@@ -34,6 +35,7 @@ userSchema.statics.doesEmailExist = async function (
   return Boolean(user)
 }
 
+/* eslint-disable-next-line func-names */
 userSchema.methods.doesPasswordMatch = async function (
   password: userTypes.UserPassword,
 ): Promise<boolean> {
@@ -42,6 +44,7 @@ userSchema.methods.doesPasswordMatch = async function (
   return bcrypt.compare(password, user.password)
 }
 
+/* eslint-disable-next-line func-names */
 userSchema.pre('save', async function (next) {
   const user = this
 
