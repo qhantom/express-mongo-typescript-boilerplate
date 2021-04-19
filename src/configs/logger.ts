@@ -1,17 +1,17 @@
-import { createLogger, format, transports } from 'winston'
+import { createLogger, format, transports, Logger } from 'winston'
 
 import { config } from './config'
 
 const { combine, colorize, timestamp, errors, splat, json, simple } = format
 
-function productionLogger() {
+function productionLogger(): Logger {
   return createLogger({
     format: combine(timestamp(), errors({ stack: true }), splat(), json()),
     transports: [new transports.Console()],
   })
 }
 
-function developmentLogger() {
+function developmentLogger(): Logger {
   return createLogger({
     level: 'debug',
     format: combine(

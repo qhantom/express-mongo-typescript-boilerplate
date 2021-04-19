@@ -1,9 +1,9 @@
-import cron from 'node-cron'
+import cron, { ScheduledTask } from 'node-cron'
 
 import { logger } from './logger'
 
 // https://github.com/node-cron/node-cron/blob/master/README.md
-const runEverySecond = cron.schedule(
+const runEverySecond: ScheduledTask = cron.schedule(
   '* * * * * *',
   () => {
     logger.info('I run every second')
