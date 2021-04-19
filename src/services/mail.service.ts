@@ -9,7 +9,11 @@ transport
   .then(() => logger.info('SMTP server connected'))
   .catch(() => logger.warn('Unable to connect to SMTP server'))
 
-async function sendMail(to: string, subject: string, text: string) {
+async function sendMail(
+  to: string,
+  subject: string,
+  text: string,
+): Promise<void> {
   const message = { from: config.mail.from, to, subject, text }
   await transport.sendMail(message)
 }

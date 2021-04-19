@@ -4,7 +4,11 @@ import createHttpError from 'http-errors'
 
 import { tokenService } from '../services'
 
-function isAuthenticated(req: Request, res: Response, next: NextFunction) {
+function isAuthenticated(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void {
   passport.authenticate(
     'jwt',
     { session: false },
