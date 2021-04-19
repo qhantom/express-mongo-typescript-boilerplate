@@ -24,20 +24,21 @@ const userSchema: Schema<userTypes.UserDocument> = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 userSchema.statics.doesEmailExist = async function (
-  email: string
+  email: string,
 ): Promise<boolean> {
   const user = await this.findOne({ email })
   return Boolean(user)
 }
 
 userSchema.methods.doesPasswordMatch = async function (
-  password: string
+  password: string,
 ): Promise<boolean> {
   const user = this
+
   return bcrypt.compare(password, user.password)
 }
 
