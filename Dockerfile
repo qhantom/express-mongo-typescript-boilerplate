@@ -1,6 +1,6 @@
 FROM node:15.14.0-alpine3.13 as builder
 
-WORKDIR /usr/src/app
+WORKDIR /home/node
 
 COPY . .
 
@@ -9,7 +9,7 @@ RUN npm run build
 
 FROM node:15.14.0-alpine3.13
 
-WORKDIR /usr/src/app
+WORKDIR /home/node
 
 ENV NODE_ENV=production
 ENV SERVER_PORT=3000
@@ -22,9 +22,12 @@ ENV SMTP_USERNAME=your@mail.com
 ENV SMTP_PASSWORD=password
 ENV EMAIL_FROM=boiler@plate.dev
 
-COPY --from=builder /usr/src/app/dist ./
-COPY package.json package-lock.json ecosystem.config.json ./
+USER node
+
+COPY --from=builder /home/node/dist ./
+COPY --chown=node:node package.json package-lock.json ecosystem.config.json ./
 
 RUN npm install --production
+
 
 CMD ["npm", "start"]
