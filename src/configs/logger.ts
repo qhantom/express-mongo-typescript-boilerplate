@@ -1,4 +1,3 @@
-import path from 'path'
 import { createLogger, format, transports } from 'winston'
 
 import { config } from './config'
@@ -7,17 +6,8 @@ const { combine, colorize, timestamp, errors, splat, json, simple } = format
 
 function productionLogger() {
   return createLogger({
-    level: 'info',
     format: combine(timestamp(), errors({ stack: true }), splat(), json()),
-    transports: [
-      new transports.File({
-        filename: path.join(__dirname, '../logs/error.log'),
-        level: 'error',
-      }),
-      new transports.File({
-        filename: path.join(__dirname, '../logs/combined.log'),
-      }),
-    ],
+    transports: [new transports.Console()],
   })
 }
 
