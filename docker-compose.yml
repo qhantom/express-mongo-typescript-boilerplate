@@ -9,8 +9,6 @@ services:
       - mongo
     ports:
       - 3000:3000
-    volumes:
-      - node-logs:/usr/src/app/logs
   mongo:
     image: mongo:4.4.5-bionic
     ports:
@@ -18,5 +16,4 @@ services:
     volumes:
       - mongo-data:/data/db
 volumes:
-  node-logs:
   mongo-data:
