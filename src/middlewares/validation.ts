@@ -1,28 +1,36 @@
 import { Request, Response, NextFunction } from 'express'
-import { body, validationResult } from 'express-validator'
+import { body, validationResult, ValidationChain } from 'express-validator'
 
-function registerValidator() {
+interface SanitizedError {
+  [param: string]: string
+}
+
+function registerValidator(): ValidationChain[] {
   return [
     body('email').isEmail().normalizeEmail().trim(),
     body('password').trim().isStrongPassword(),
   ]
 }
 
-function loginValidator() {
+function loginValidator(): ValidationChain[] {
   return [
     body('email').isEmail().normalizeEmail().trim(),
     body('password').trim().isStrongPassword(),
   ]
 }
 
-function validate(req: Request, res: Response, next: NextFunction) {
+function validate(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void | Response<{ validationErrors: SanitizedError[] }> {
   const errors = validationResult(req)
 
   if (errors.isEmpty()) {
     return next()
   }
 
-  const sanitizedErrors = errors
+  const sanitizedErrors: SanitizedError[] = errors
     .array()
     .map((error) => ({ [error.param]: error.msg }))
 

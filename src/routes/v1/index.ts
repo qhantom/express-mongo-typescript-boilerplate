@@ -1,17 +1,22 @@
-import express from 'express'
+import express, { Router } from 'express'
 
 import { authRoutes } from './auth.route'
 
 const router = express.Router()
 
-const routes = [
+interface Route {
+  path: string
+  routes: Router
+}
+
+const routes: Route[] = [
   {
     path: '/auth',
     routes: authRoutes,
   },
 ]
 
-routes.forEach((route) => {
+routes.forEach((route: Route) => {
   router.use(route.path, route.routes)
 })
 

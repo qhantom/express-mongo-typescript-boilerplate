@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Router } from 'express'
 import asyncHandler from 'express-async-handler'
 
 import {
@@ -9,7 +9,7 @@ import {
 } from '../../middlewares'
 import { authController } from '../../controllers'
 
-const router = express.Router()
+const router: Router = express.Router()
 
 router.post(
   '/register',
