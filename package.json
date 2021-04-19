@@ -2,7 +2,7 @@
   "name": "express-mongo-typescript-boilerplate",
   "version": "1.0.0",
   "description": "This is an ExpressJS boilerplate written in TypeScript with MongoDB.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "nodemon",
@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/qhantom/express-mongo-typescript-boilerplate.git"
+    "url": "git+ssh://git@github.com:qhantom/express-mongo-typescript-boilerplate.git"
   },
   "author": "Gerrit Schroeer",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/qhantom/express-mongo-typescript-boilerplate/issues"
+    "url": "https://github.com/qhantom/express-mongo-typescript-boilerplate/issues"
   },
   "npx": {
     "noInstall": true
   },
-  "homepage": "https://gitlab.com/qhantom/express-mongo-typescript-boilerplate#readme",
+  "homepage": "https://github.com/qhantom/express-mongo-typescript-boilerplate#readme",
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
