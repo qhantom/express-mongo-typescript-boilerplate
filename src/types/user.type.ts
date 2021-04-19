@@ -1,12 +1,14 @@
 import { Document } from 'mongoose'
 
+type UserEmail = string
+type UserPassword = string
 interface User {
-  email: string
-  password: string
+  email: UserEmail
+  password: UserPassword
 }
 
 interface UserDocument extends User, Document {
-  doesPasswordMatch: (password: string) => Promise<boolean>
+  doesPasswordMatch: (password: UserPassword) => Promise<boolean>
 }
 
-export { User, UserDocument }
+export { User, UserDocument, UserEmail, UserPassword }

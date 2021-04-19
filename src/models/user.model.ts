@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import { userTypes } from '../types'
 
 interface IUser extends Model<userTypes.UserDocument> {
-  doesEmailExist: (email: string) => Promise<boolean>
+  doesEmailExist: (email: userTypes.UserEmail) => Promise<boolean>
 }
 
 const userSchema: Schema<userTypes.UserDocument> = new Schema(
@@ -28,14 +28,14 @@ const userSchema: Schema<userTypes.UserDocument> = new Schema(
 )
 
 userSchema.statics.doesEmailExist = async function (
-  email: string,
+  email: userTypes.UserEmail,
 ): Promise<boolean> {
   const user = await this.findOne({ email })
   return Boolean(user)
 }
 
 userSchema.methods.doesPasswordMatch = async function (
-  password: string,
+  password: userTypes.UserPassword,
 ): Promise<boolean> {
   const user = this
 
