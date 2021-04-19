@@ -37,6 +37,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next(createHttpError(404))
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
   const { status = 500, message, stack } = err
 
