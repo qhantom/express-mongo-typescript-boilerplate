@@ -12,6 +12,7 @@ const config = {
     },
   },
   jwt: {
+    issuer: process.env.JWT_ISSUER,
     secret: process.env.JWT_SECRET,
     expirationHours: process.env.JWT_EXPIRATION_HOURS,
   },
