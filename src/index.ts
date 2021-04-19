@@ -23,7 +23,7 @@ mongoose.connect(
   },
 )
 
-const exitHandler = () => {
+function exitHandler(): void {
   if (server) {
     server.close(() => {
       logger.info('Server closed')
@@ -34,7 +34,7 @@ const exitHandler = () => {
   }
 }
 
-const unexpectedErrorHandler = (error: Error) => {
+function unexpectedErrorHandler(error: Error): void {
   logger.error(error)
   exitHandler()
 }
