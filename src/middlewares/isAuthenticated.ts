@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import passport from 'passport'
 import createHttpError from 'http-errors'
 
-import { findToken } from '../services/token.service'
+import { tokenService } from '../services'
 
 function isAuthenticated(req: Request, res: Response, next: NextFunction) {
   passport.authenticate(
@@ -13,7 +13,9 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
         next(createHttpError(401, error || info))
       }
 
-      const token = await findToken(req.headers.authorization.split(' ')[1])
+      const token = await tokenService.findToken(
+        req.headers.authorization.split(' ')[1],
+      )
 
       if (token) {
         next(createHttpError(401, 'Token blacklisted'))
