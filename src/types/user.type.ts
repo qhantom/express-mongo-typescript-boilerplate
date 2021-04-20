@@ -2,6 +2,7 @@ import { Document } from 'mongoose'
 
 type UserEmail = string
 type UserPassword = string
+
 interface User {
   email: UserEmail
   password: UserPassword
