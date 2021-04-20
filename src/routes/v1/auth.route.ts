@@ -25,6 +25,6 @@ router.post(
   asyncHandler(authController.login),
 )
 
-router.post('/logout', isAuthenticated, asyncHandler(authController.logout))
+router.get('/logout', isAuthenticated, asyncHandler(authController.logout))
 
 export { router as authRoutes }

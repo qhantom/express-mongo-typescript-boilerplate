@@ -14,7 +14,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 async function logout(req: Request, res: Response, next: NextFunction) {
-  await authService.logout(req.body, req.headers.authorization)
+  await authService.logout(req.headers.authorization)
   res.status(200).send()
 }
 
