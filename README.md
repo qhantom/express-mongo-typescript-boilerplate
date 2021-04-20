@@ -1,5 +1,7 @@
 <div align="center"><strong>Node.js | Express | MongoDB | TypeScript</strong></div>
-<div align="center">A production-ready boilerplate based on Node.js, Express and MongoDB (using Mongoose ODM) written in TypeScript. It gets you up and running very fast to quickly build RESTful APIs.</div>
+<div align="center">A production-ready boilerplate based on Node.js, Express and MongoDB (using Mongoose ODM) written in TypeScript. It gets you up and running very fast to quickly build RESTful APIs.<br />
+  <em>Feel free to contribute</em>
+</div>
 
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
