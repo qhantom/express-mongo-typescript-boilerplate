@@ -3,7 +3,6 @@
 
 ## Features
 
----
 
 <dl>
   <dt>MongoDB</dt>
@@ -51,7 +50,6 @@
 
 ## Run the app
 
----
 
 **Locally**
 
@@ -73,8 +71,6 @@ _Start the Node.js container only_
 `docker build <project-dir> -t node-app`
 
 ## Environment variables
-
----
 
 The **NODE_ENV** environment variable is set inside `nodemon.json` for `development` and in the `Dockerfile` for `production`. If you don't use Docker in production, you can set the `NODE_ENV` variable in the `ecosystem.config.json` file (PM2 config file) like so:
 
@@ -114,8 +110,6 @@ EMAIL_FROM=mail-sender
 
 ## Project Structure
 
----
-
 ```
 src\
  |--config\         # Environment variables and configurations
@@ -131,11 +125,12 @@ src\
 
 ## API
 
----
-
 ### Endpoints
 
 **Auth routes**
+
 `POST /v1/auth/register` - _body:_ `{ email: string, password: string }`
+
 `POST /v1/auth/login` - _body:_ `{ email: string, password: string }`
+
 `GET /v1/auth/logout`
