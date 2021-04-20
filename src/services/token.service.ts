@@ -1,15 +1,17 @@
 import jwt from 'jsonwebtoken'
 import { addHours } from 'date-fns'
 
-import { Token } from '../models'
+import { Token, User } from '../models'
 import { config } from '../configs'
 import { tokenTypes, userTypes } from '../types'
 
-function invalidateToken(
-  user: userTypes.UserDocument,
+async function invalidateToken(
+  email: userTypes.UserEmail,
   token: tokenTypes.BearerToken,
   expirationDate: Date,
 ): Promise<tokenTypes.TokenDocument> {
+  const user = await User.findOne({ email })
+
   return Token.create({
     token,
     user: user._id,
