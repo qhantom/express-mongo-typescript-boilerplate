@@ -4,6 +4,7 @@ import { UserEmail } from './user.type'
 
 type BearerToken = string
 type Issuer = string
+
 interface Token {
   token: BearerToken
   user: UserEmail
