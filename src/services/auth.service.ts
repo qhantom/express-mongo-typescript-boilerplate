@@ -28,13 +28,7 @@ async function login(
   }
 }
 
-async function logout(user: userTypes.User, token: tokenTypes.BearerToken) {
-  const userDocument = await User.findOne({ email: user.email })
-
-  if (!userDocument) {
-    throw createHttpError(404, 'User does not exist')
-  }
-
+async function logout(token: tokenTypes.BearerToken) {
   const extractedToken = token.split(' ')[1]
 
   const payload = jwt.verify(
@@ -42,7 +36,11 @@ async function logout(user: userTypes.User, token: tokenTypes.BearerToken) {
     config.jwt.secret,
   ) as tokenTypes.Payload
 
-  await invalidateToken(userDocument, extractedToken, fromUnixTime(payload.exp))
+  if (!payload) {
+    throw createHttpError(401, 'Token invalid')
+  }
+
+  await invalidateToken(payload.sub, extractedToken, fromUnixTime(payload.exp))
 }
 
 export { register, login, logout }
