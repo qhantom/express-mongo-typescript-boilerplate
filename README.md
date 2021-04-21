@@ -7,7 +7,6 @@
 
 ## Features
 
-
 <dl>
   <dt>MongoDB</dt>
   <dd>NoSQL database using <a href="https://mongoosejs.com/">Mongoose</a> ODM</dd>
@@ -53,7 +52,6 @@
 </dl>
 
 ## Run the app
-
 
 **Locally**
 
@@ -105,8 +103,8 @@ JWT_SECRET=your-secret
 JWT_EXPIRATION_HOURS=24
 JWT_ISSUER=Express Boilerplate
 
-SMPT_HOST=mail-server
-SMTP_PORT=587
+SMTP_HOST=mail-server
+TP_PORT=587
 SMTP_USERNAME=mail-server-username
 SMTP_PASSWORD=mails-server-password
 EMAIL_FROM=mail-sender
