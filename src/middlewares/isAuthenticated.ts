@@ -18,7 +18,7 @@ function isAuthenticated(
       }
 
       const token = await tokenService.findToken(
-        req.headers.authorization.split(' ')[1],
+        req.headers?.authorization?.split(' ')[1],
       )
 
       if (token) {
