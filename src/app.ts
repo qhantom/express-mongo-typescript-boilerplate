@@ -1,3 +1,4 @@
+import path from 'path'
 import express, { Request, Response, NextFunction } from 'express'
 import passport from 'passport'
 import createHttpError, { HttpError } from 'http-errors'
@@ -30,6 +31,8 @@ passport.use('jwt', strategy)
 if (config.environment === 'production') {
   app.use(generalRateLimiter)
 }
+
+app.use(express.static(path.join(__dirname, '../public')))
 
 app.use('/v1', routes)
 
