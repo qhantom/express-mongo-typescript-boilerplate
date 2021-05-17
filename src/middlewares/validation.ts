@@ -13,10 +13,7 @@ function registerValidator(): ValidationChain[] {
 }
 
 function loginValidator(): ValidationChain[] {
-  return [
-    body('email').isEmail().normalizeEmail().trim(),
-    body('password').trim().isStrongPassword(),
-  ]
+  return [body('email').isEmail().normalizeEmail().trim()]
 }
 
 function validate(
