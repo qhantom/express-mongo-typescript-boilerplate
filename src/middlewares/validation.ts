@@ -8,6 +8,7 @@ interface SanitizedError {
 function registerValidator(): ValidationChain[] {
   return [
     body('email').isEmail().normalizeEmail().trim(),
+    // minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1
     body('password').trim().isStrongPassword(),
   ]
 }
