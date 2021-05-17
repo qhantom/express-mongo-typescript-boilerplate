@@ -49,6 +49,9 @@
 
   <dt>Error Handling</dt>
   <dd>centralized error handling</dd>
+
+  <dt>Static Content</dt>
+  <dd>Serve static content via the <code>public</code> folder</dd>
 </dl>
 
 ## Run the app
