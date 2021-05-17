@@ -43,15 +43,13 @@ process.on('uncaughtException', unexpectedErrorHandler)
 process.on('unhandledRejection', unexpectedErrorHandler)
 
 process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received')
+  logger.info('SIGTERM signal received: closing HTTP server')
   if (server) {
-    server.close()
+    server.close(() => logger.info('HTTP server closed'))
   }
 })
 
 process.on('SIGINT', () => {
   logger.info('SIGINT signal received')
-  if (server) {
-    server.close()
-  }
+  process.exit()
 })
