@@ -12,9 +12,9 @@ function isAuthenticated(
   passport.authenticate(
     'jwt',
     { session: false },
-    async (error, payload, info) => {
+    async (error, payload, info): Promise<any> => {
       if (error || !payload || info) {
-        next(createHttpError(401, error || info))
+        return next(createHttpError(401, error || info))
       }
 
       const token = await tokenService.findToken(
@@ -22,10 +22,10 @@ function isAuthenticated(
       )
 
       if (token) {
-        next(createHttpError(401, 'Token blacklisted'))
+        return next(createHttpError(401, 'Token blacklisted'))
       }
 
-      next()
+      return next()
     },
   )(req, res, next)
 }
