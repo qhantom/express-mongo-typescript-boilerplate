@@ -6,7 +6,8 @@
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "nodemon",
-    "build": "tsc"
+    "build": "tsc",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "husky": "^6.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
+    "standard-version": "^9.3.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
