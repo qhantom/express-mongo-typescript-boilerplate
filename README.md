@@ -52,6 +52,9 @@
 
   <dt>Static Content</dt>
   <dd>Serve static content via the <code>public</code> folder</dd>
+
+  <dt>Versioning</dt>
+  <dd>Using <a href="https://github.com/conventional-changelog/standard-version">standard version</a> to version your project following <a href="https://semver.org/">semver</a></dd>
 </dl>
 
 ## Run the app
