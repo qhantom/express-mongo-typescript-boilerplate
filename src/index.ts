@@ -3,53 +3,60 @@ import mongoose, { NativeError } from 'mongoose'
 
 import { app } from './app'
 
+import { registerShutdownHandler } from './utils/lifecycles'
+
 import { config, logger } from './configs'
 
 let server: http.Server
 
-mongoose.connect(
-  config.database.URI,
-  config.database.options,
-  (error: NativeError) => {
-    if (error) {
-      logger.error(`Database Error: ${error}`)
-    } else {
-      logger.info('Database connected')
+function startHttpServer(): void {
+  logger.info(`Starting HTTP Server on port ${config.server.port}`)
+  server = app.listen(config.server.port, () => {
+    logger.info('HTTP Server started')
+  })
+}
 
-      server = app.listen(config.server.port, () => {
-        logger.info(`Server started on port ${config.server.port}`)
-      })
-    }
-  },
-)
+function stopHttpServer(): Promise<void> {
+  logger.info('Stopping HTTP Server')
 
-function exitHandler(): void {
-  if (server) {
-    server.close(() => {
-      logger.info('Server closed')
-      process.exit(1)
+  return new Promise((resolve, reject) => {
+    server.close(error => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(undefined)
+      }
     })
-  } else {
-    process.exit(1)
-  }
+  })
 }
 
-function unexpectedErrorHandler(error: Error): void {
-  logger.error(error)
-  exitHandler()
+function connectDatabase(): Promise<void> {
+  logger.info(`Connecting to database`)
+
+  return new Promise((resolve, reject) => {
+    mongoose.connect(
+      config.database.URI,
+      config.database.options,
+      (error: NativeError) => {
+        if (error) {
+          logger.error(`Database Error: ${error}`)
+          reject(error)
+        } else {
+          logger.info('Database connected')
+          resolve(undefined)
+        }
+      },
+    )
+  })
+}
+async function main(): Promise<void> {
+  logger.info(`Running in ${config.environment} mode`)
+
+  await connectDatabase()
+
+  startHttpServer()
+
+  registerShutdownHandler(stopHttpServer)
 }
 
-process.on('uncaughtException', unexpectedErrorHandler)
-process.on('unhandledRejection', unexpectedErrorHandler)
-
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received: closing HTTP server')
-  if (server) {
-    server.close(() => logger.info('HTTP server closed'))
-  }
-})
-
-process.on('SIGINT', () => {
-  logger.info('SIGINT signal received')
-  process.exit()
-})
+main()
