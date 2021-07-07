@@ -7,7 +7,8 @@
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "nodemon",
     "build": "tsc",
-    "release": "standard-version"
+    "release": "standard-version",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
