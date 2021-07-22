@@ -1,9 +1,13 @@
 import { logger } from '../configs'
 
-const shutdownHandler: any[] = [] // stopped here
+const shutdownHandler: { (): Promise<void> }[] = []
+
+function registerShutdownHandler(handler: () => Promise<void>): void {
+  shutdownHandler.push(handler)
+}
 
 async function gracefulShutdown(): Promise<void> {
-  const promises: Promise<any>[] = []
+  const promises: Promise<void>[] = []
   for (const handler of shutdownHandler) {
     promises.push(handler())
   }
@@ -29,9 +33,5 @@ process.on('SIGTERM', () => {
   logger.info('SIGTERM signal received: closing HTTP server')
   gracefulShutdown()
 })
-
-function registerShutdownHandler(handler: any): void {
-  shutdownHandler.push(handler)
-}
 
 export { registerShutdownHandler }
