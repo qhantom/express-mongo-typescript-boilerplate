@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/qhantom/express-mongo-typescript-boilerplate/compare/v1.0.0...v1.2.0) (2021-07-22)
+
+
+### Features
+
+* add 'standard-version' for repo versioning ([94084bf](https://github.com/qhantom/express-mongo-typescript-boilerplate/commit/94084bf86be2dde63603caa31a3256fe8410b846))
+
 ## [1.1.0](https://github.com/qhantom/express-mongo-typescript-boilerplate/compare/v1.0.0...v1.1.0) (2021-06-10)
 
 
