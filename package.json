@@ -8,7 +8,8 @@
     "dev": "nodemon",
     "build": "tsc",
     "release": "standard-version",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "@types/express-mongo-sanitize": "^1.3.2",
     "@types/express-rate-limit": "^5.1.3",
     "@types/http-errors": "^1.8.1",
+    "@types/jest": "^26.0.24",
     "@types/morgan": "^1.9.3",
     "@types/node-cron": "^2.0.4",
     "@types/nodemailer": "^6.4.4",
@@ -46,9 +48,11 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
     "standard-version": "^9.3.1",
+    "ts-jest": "^27.0.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.3.5"
   },
