@@ -16,7 +16,9 @@ async function getUser(id: string): Promise<userTypes.UserDocument> {
   return user
 }
 
-async function createUser(body: any): Promise<userTypes.UserDocument> {
+async function createUser(
+  body: userTypes.User,
+): Promise<userTypes.UserDocument> {
   if (await User.doesEmailExist(body.email)) {
     throw createHttpError(400, 'Email already exists')
   }
@@ -25,4 +27,26 @@ async function createUser(body: any): Promise<userTypes.UserDocument> {
   return user
 }
 
-export { getUsers, getUser, createUser }
+async function updateUser(
+  id: string,
+  body: userTypes.User,
+): Promise<userTypes.UserDocument> {
+  if (await User.doesEmailExist(body.email)) {
+    throw createHttpError(400, 'Email already exists')
+  }
+
+  const user: userTypes.UserDocument = await User.findOneAndUpdate(
+    { _id: id },
+    body,
+    {
+      new: true,
+    },
+  )
+  return user
+}
+
+async function deleteUser(id: string): Promise<void> {
+  await User.findOneAndDelete({ _id: id })
+}
+
+export { getUsers, getUser, createUser, updateUser, deleteUser }

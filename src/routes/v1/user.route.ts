@@ -18,8 +18,13 @@ router.post(
   asyncHandler(userController.createUser),
 )
 
-// router.put('/:id', isAuthenticated, asyncHandler(userController.register))
+router.put(
+  '/:id',
+  isAuthenticated,
+  registerValidator(),
+  asyncHandler(userController.updateUser),
+)
 
-// router.delete('/:id', isAuthenticated, asyncHandler(userController.register))
+router.delete('/:id', isAuthenticated, asyncHandler(userController.deleteUser))
 
 export { router as userRoutes }
