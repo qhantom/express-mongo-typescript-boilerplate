@@ -19,7 +19,7 @@ interface TokenResponse {
 type TokenDocument = Token & Document
 
 interface Payload {
-  sub: UserEmail
+  sub: string // ObjectId of user
   iat: number
   exp: number
   issuer: Issuer

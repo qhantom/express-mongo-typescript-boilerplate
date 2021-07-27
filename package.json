@@ -65,6 +65,7 @@
     "helmet": "^4.6.0",
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "mongoose": "^5.13.3",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.0",
