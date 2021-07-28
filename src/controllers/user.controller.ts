@@ -20,18 +20,16 @@ async function getUser(req: Request, res: Response, next: NextFunction) {
 }
 
 async function createUser(req: Request, res: Response, next: NextFunction) {
-  const createdUser: userTypes.UserDocument = await userService.createUser(
-    req.body,
-  )
-  res.status(201).json(createdUser)
+  const user: userTypes.UserDocument = await userService.createUser(req.body)
+  res.status(201).json(user)
 }
 
 async function updateUser(req: Request, res: Response, next: NextFunction) {
-  const updatedUser: userTypes.UserDocument = await userService.updateUser(
+  const user: userTypes.UserDocument = await userService.updateUser(
     req.params.id,
     req.body,
   )
-  res.status(200).json(updatedUser)
+  res.status(200).json(user)
 }
 
 async function deleteUser(req: Request, res: Response, next: NextFunction) {

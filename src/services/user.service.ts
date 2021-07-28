@@ -10,7 +10,7 @@ async function getUsers(): Promise<userTypes.UserDocument[]> {
 }
 
 async function getUser(id: string): Promise<userTypes.UserDocument> {
-  const user: userTypes.UserDocument = await User.findOne({ _id: id }).select(
+  const user: userTypes.UserDocument = await User.findById(id).select(
     '-password',
   )
   return user
@@ -35,18 +35,14 @@ async function updateUser(
     throw createHttpError(400, 'Email already exists')
   }
 
-  const user: userTypes.UserDocument = await User.findOneAndUpdate(
-    { _id: id },
-    body,
-    {
-      new: true,
-    },
-  )
+  const user: userTypes.UserDocument = await User.findByIdAndUpdate(id, body, {
+    new: true,
+  })
   return user
 }
 
 async function deleteUser(id: string): Promise<void> {
-  await User.findOneAndDelete({ _id: id })
+  await User.findByIdAndDelete(id)
 }
 
 export { getUsers, getUser, createUser, updateUser, deleteUser }

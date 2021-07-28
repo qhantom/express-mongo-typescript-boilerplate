@@ -2,6 +2,8 @@ import express, { Router } from 'express'
 
 import { authRoutes } from './auth.route'
 import { userRoutes } from './user.route'
+import { roleRoutes } from './role.route'
+import { rightRoute } from './right.route'
 
 const router = express.Router()
 
@@ -18,6 +20,14 @@ const routes: Route[] = [
   {
     path: '/users',
     routes: userRoutes,
+  },
+  {
+    path: '/roles',
+    routes: roleRoutes,
+  },
+  {
+    path: '/rights',
+    routes: rightRoute,
   },
 ]
 

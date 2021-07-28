@@ -34,7 +34,7 @@ async function createToken(
   )
 
   const payload: tokenTypes.Payload = {
-    sub: user._id,
+    sub: user.email,
     iat: Math.floor(Date.now() / 1000),
     exp:
       Math.floor(Date.now() / 1000) +

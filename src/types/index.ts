@@ -1,2 +1,5 @@
 export * as userTypes from './user.type'
 export * as tokenTypes from './token.type'
+export * as rightTypes from './right.type'
+export * as roleTypes from './role.type'
+export * as rightTypes from './right.type'
