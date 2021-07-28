@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import mongooseAutopopulate from 'mongoose-autopopulate'
 
 import { roleTypes } from '../types'
 
@@ -19,9 +20,12 @@ const roleSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'Right',
+      autopopulate: true,
     },
   ],
 })
+
+roleSchema.plugin(mongooseAutopopulate)
 
 const Role = model<roleTypes.Role>('Role', roleSchema)
 
