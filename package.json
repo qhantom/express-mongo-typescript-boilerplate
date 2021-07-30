@@ -6,9 +6,11 @@
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "nodemon",
+    "dev:populate-db": "npm run populate-db && nodemon",
     "build": "tsc",
     "release": "standard-version",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "populate-db": "seed -u <MONGO_URI> -d ./mongoDB/data"
   },
   "repository": {
     "type": "git",
@@ -47,6 +49,7 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
+    "mongo-seeding": "^3.7.0",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
     "standard-version": "^9.3.1",
