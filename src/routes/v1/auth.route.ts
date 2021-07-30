@@ -25,6 +25,8 @@ router.post(
   asyncHandler(authController.login),
 )
 
+router.get('/me', isAuthenticated, asyncHandler(authController.me))
+
 router.get('/logout', isAuthenticated, asyncHandler(authController.logout))
 
 export { router as authRoutes }
