@@ -49,6 +49,7 @@ function connectDatabase(): Promise<void> {
     )
   })
 }
+
 async function main(): Promise<void> {
   logger.info(`Running in ${config.environment} mode`)
 
