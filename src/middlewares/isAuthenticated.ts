@@ -12,8 +12,8 @@ function isAuthenticated(
   passport.authenticate(
     'jwt',
     { session: false },
-    async (error, payload, info): Promise<any> => {
-      if (error || !payload || info) {
+    async (error, user, info): Promise<any> => {
+      if (error || !user || info) {
         return next(createHttpError(401, error || info))
       }
 
@@ -24,6 +24,8 @@ function isAuthenticated(
       if (token) {
         return next(createHttpError(401, 'Token blacklisted'))
       }
+
+      req.user = user
 
       return next()
     },
