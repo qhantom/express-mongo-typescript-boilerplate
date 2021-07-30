@@ -9,12 +9,12 @@ function doesRightExist(name: string): Promise<boolean> {
 }
 
 async function getRights(): Promise<IRight[]> {
-  const rights = await Right.find()
+  const rights: IRight[] = await Right.find()
   return rights
 }
 
 async function getRight(id: string): Promise<IRight> {
-  const right = await Right.findById(id)
+  const right: IRight = await Right.findById(id)
   return right
 }
 
@@ -23,12 +23,12 @@ async function createRight(body: IRight): Promise<IRight> {
     throw createHttpError(400, `Right with name ${body.name} already exists`)
   }
 
-  const right = await Right.create(body)
+  const right: IRight = await Right.create(body)
   return right
 }
 
 async function updateRight(id: string, body: IRight): Promise<IRight> {
-  const right = await Right.findByIdAndUpdate(id, body, { new: true })
+  const right: IRight = await Right.findByIdAndUpdate(id, body, { new: true })
   return right
 }
 
