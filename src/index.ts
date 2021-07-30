@@ -47,6 +47,10 @@ function connectDatabase(): Promise<void> {
         }
       },
     )
+
+    if (config.environment === 'development') {
+      mongoose.set('debug', true)
+    }
   })
 }
 
