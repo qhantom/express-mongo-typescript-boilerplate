@@ -1,23 +1,24 @@
 import createHttpError from 'http-errors'
+
 import { Role } from '../models'
 
-import { roleTypes } from '../types'
+import { Role as IRole } from '../types/role.type'
 
 function doesRoleExist(name: string): Promise<boolean> {
   return Role.exists({ name })
 }
 
-async function getRoles(): Promise<roleTypes.Role[]> {
+async function getRoles(): Promise<IRole[]> {
   const roles = await Role.find()
   return roles
 }
 
-async function getRole(id: string): Promise<roleTypes.Role> {
+async function getRole(id: string): Promise<IRole> {
   const role = await Role.findById(id)
   return role
 }
 
-async function createRole(body: roleTypes.Role): Promise<roleTypes.Role> {
+async function createRole(body: IRole): Promise<IRole> {
   if (await doesRoleExist(body.name)) {
     throw createHttpError(400, `Role with name ${body.name} already exists`)
   }
@@ -26,10 +27,7 @@ async function createRole(body: roleTypes.Role): Promise<roleTypes.Role> {
   return role
 }
 
-async function updateRole(
-  id: string,
-  body: roleTypes.Role,
-): Promise<roleTypes.Role> {
+async function updateRole(id: string, body: IRole): Promise<IRole> {
   const role = await Role.findByIdAndUpdate(id, body, { new: true })
   return role
 }

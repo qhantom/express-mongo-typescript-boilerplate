@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
 import mongooseAutopopulate from 'mongoose-autopopulate'
 
-import { roleTypes } from '../types'
+import { Role as IRole } from '../types/role.type'
 
 const roleSchema = new Schema({
   name: {
@@ -27,6 +27,6 @@ const roleSchema = new Schema({
 
 roleSchema.plugin(mongooseAutopopulate)
 
-const Role = model<roleTypes.Role>('Role', roleSchema)
+const Role = model<IRole>('Role', roleSchema)
 
 export { Role }

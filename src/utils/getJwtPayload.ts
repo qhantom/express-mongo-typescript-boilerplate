@@ -1,8 +1,8 @@
 import jwtDecode from 'jwt-decode'
 
-import { tokenTypes } from '../types'
+import { Payload } from '../types/token.type'
 
-function getJwtPayload(token: string): tokenTypes.Payload {
+function getJwtPayload(token: string): Payload {
   return jwtDecode(token)
 }
 

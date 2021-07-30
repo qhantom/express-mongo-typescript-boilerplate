@@ -1,9 +1,9 @@
-import { rightTypes } from '.'
+import { Right } from './right.type'
 
 interface Role {
   name: string
   description: string
-  rights: rightTypes.Right[]
+  rights: Right[]
 }
 
 export { Role }

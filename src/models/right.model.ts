@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose'
 
-import { rightTypes } from '../types'
+import { Right as IRight } from '../types/right.type'
 
 const rightSchema = new Schema({
   name: {
@@ -17,6 +17,6 @@ const rightSchema = new Schema({
   },
 })
 
-const Right = model<rightTypes.Right>('Right', rightSchema)
+const Right = model<IRight>('Right', rightSchema)
 
 export { Right }

@@ -1,31 +1,31 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express'
 import createHttpError from 'http-errors'
 
-import { userTypes, tokenTypes } from '../types'
-
 import { userService } from '../services'
+
+import { UserDocument } from '../types/user.type'
+import { Payload } from '../types/token.type'
 
 import { getTokenFromHeader } from '../utils/getTokenFromHeader'
 import { getJwtPayload } from '../utils/getJwtPayload'
 
 async function getUsers(req: Request, res: Response, next: NextFunction) {
-  const users: userTypes.UserDocument[] = await userService.getUsers()
+  const users: UserDocument[] = await userService.getUsers()
   res.status(200).json(users)
 }
 
 async function getUser(req: Request, res: Response, next: NextFunction) {
-  const user: userTypes.UserDocument = await userService.getUser(req.params.id)
+  const user: UserDocument = await userService.getUser(req.params.id)
   res.status(200).json(user)
 }
 
 async function createUser(req: Request, res: Response, next: NextFunction) {
-  const user: userTypes.UserDocument = await userService.createUser(req.body)
+  const user: UserDocument = await userService.createUser(req.body)
   res.status(201).json(user)
 }
 
 async function updateUser(req: Request, res: Response, next: NextFunction) {
-  const user: userTypes.UserDocument = await userService.updateUser(
+  const user: UserDocument = await userService.updateUser(
     req.params.id,
     req.body,
   )
@@ -33,7 +33,7 @@ async function updateUser(req: Request, res: Response, next: NextFunction) {
 }
 
 async function deleteUser(req: Request, res: Response, next: NextFunction) {
-  const { sub }: tokenTypes.Payload = getJwtPayload(getTokenFromHeader(req))
+  const { sub }: Payload = getJwtPayload(getTokenFromHeader(req))
 
   if (sub === req.params.id) {
     throw createHttpError(400, 'You cannot delete yourself')

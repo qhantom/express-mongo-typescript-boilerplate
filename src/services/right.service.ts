@@ -1,23 +1,24 @@
 import createHttpError from 'http-errors'
+
 import { Right } from '../models'
 
-import { rightTypes } from '../types'
+import { Right as IRight } from '../types/right.type'
 
 function doesRightExist(name: string): Promise<boolean> {
   return Right.exists({ name })
 }
 
-async function getRights(): Promise<rightTypes.Right[]> {
+async function getRights(): Promise<IRight[]> {
   const rights = await Right.find()
   return rights
 }
 
-async function getRight(id: string): Promise<rightTypes.Right> {
+async function getRight(id: string): Promise<IRight> {
   const right = await Right.findById(id)
   return right
 }
 
-async function createRight(body: rightTypes.Right): Promise<rightTypes.Right> {
+async function createRight(body: IRight): Promise<IRight> {
   if (await doesRightExist(body.name)) {
     throw createHttpError(400, `Right with name ${body.name} already exists`)
   }
@@ -26,10 +27,7 @@ async function createRight(body: rightTypes.Right): Promise<rightTypes.Right> {
   return right
 }
 
-async function updateRight(
-  id: string,
-  body: rightTypes.Right,
-): Promise<rightTypes.Right> {
+async function updateRight(id: string, body: IRight): Promise<IRight> {
   const right = await Right.findByIdAndUpdate(id, body, { new: true })
   return right
 }
