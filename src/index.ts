@@ -3,9 +3,9 @@ import mongoose, { NativeError } from 'mongoose'
 
 import { app } from './app'
 
-import { registerShutdownHandler } from './utils/lifecycles'
-
 import { config, logger } from './configs'
+
+import { registerShutdownHandler } from './utils/lifecycles'
 
 let server: http.Server
 

@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken'
 import { addHours } from 'date-fns'
 
-import { Token, User } from '../models'
 import { config } from '../configs'
+
+import { Token, User } from '../models'
+
 import {
   BearerToken,
   Payload,

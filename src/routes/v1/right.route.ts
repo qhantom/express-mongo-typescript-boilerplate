@@ -1,9 +1,11 @@
 import express, { Router } from 'express'
 import asyncHandler from 'express-async-handler'
 
-import { isAuthenticated, isAuthorized } from '../../middlewares'
-import { rightController } from '../../controllers'
 import { Rights } from '../../configs'
+
+import { isAuthenticated, isAuthorized } from '../../middlewares'
+
+import { rightController } from '../../controllers'
 
 const router: Router = express.Router()
 

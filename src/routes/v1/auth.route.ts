@@ -7,6 +7,7 @@ import {
   registerValidator,
   loginValidator,
 } from '../../middlewares'
+
 import { authController } from '../../controllers'
 
 const router: Router = express.Router()
