@@ -3,9 +3,9 @@ import mongoose, { NativeError } from 'mongoose'
 
 import { app } from './app'
 
-import { registerShutdownHandler } from './utils/lifecycles'
-
 import { config, logger } from './configs'
+
+import { registerShutdownHandler } from './utils/lifecycles'
 
 let server: http.Server
 
@@ -47,8 +47,13 @@ function connectDatabase(): Promise<void> {
         }
       },
     )
+
+    if (config.environment === 'development') {
+      mongoose.set('debug', true)
+    }
   })
 }
+
 async function main(): Promise<void> {
   logger.info(`Running in ${config.environment} mode`)
 

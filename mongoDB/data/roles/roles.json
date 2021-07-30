@@ -1,0 +1,12 @@
+[
+  {
+    "name": "ADMIN",
+    "description": "Administrator Role",
+    "rights": []
+  },
+  {
+    "name": "USER",
+    "description": "User Role",
+    "rights": []
+  }
+]

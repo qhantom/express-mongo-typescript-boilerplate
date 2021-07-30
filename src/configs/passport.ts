@@ -5,9 +5,11 @@ import {
   VerifiedCallback,
 } from 'passport-jwt'
 
-import { tokenTypes } from '../types'
-import { User } from '../models'
 import { config } from './config'
+
+import { User } from '../models'
+
+import { Payload } from '../types/token.type'
 
 const options: StrategyOptions = {
   secretOrKey: config.jwt.secret,
@@ -15,11 +17,13 @@ const options: StrategyOptions = {
 }
 
 async function verifyJwt(
-  payload: tokenTypes.Payload,
+  payload: Payload,
   done: VerifiedCallback,
 ): Promise<void> {
   try {
     const user = await User.findOne({ email: payload.sub })
+      .select('-password')
+      .populate('role')
 
     if (!user) {
       done(null, false)

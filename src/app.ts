@@ -1,10 +1,10 @@
 import path from 'path'
 import express, { Request, Response, NextFunction } from 'express'
 import passport from 'passport'
-import createHttpError, { HttpError } from 'http-errors'
 import helmet from 'helmet'
 import compression from 'compression'
 import mongoSanitize from 'express-mongo-sanitize'
+import createHttpError, { HttpError } from 'http-errors'
 
 import { config, strategy, successHandler, errorHandler } from './configs'
 

@@ -14,6 +14,9 @@
   <dt>Authentication</dt>
   <dd>JWT-based authentication with <a href="http://www.passportjs.org/">Passport</a></dd>
 
+  <dt>Roles and Rights</dt>
+  <dd>Create custom roles and assign custom rights to them in order to protect routes with specific rights</dd>
+
   <dt>Logging</dt>
   <dd>using <a href="https://github.com/winstonjs/winston">winston</a> as logger and <a href="https://github.com/winstonjs/winston">morgan</a> as HTTP request logger middleware (if running in a Docker container, the logs are sent to <a href="https://docs.docker.com/config/containers/logging/"><code>stdout</code></a> of the Docker daemon)</dd>
 
@@ -141,4 +144,42 @@ src\
 
 `POST /v1/auth/login` - _body:_ `{ email: string, password: string }`
 
+`GET /v1/auth/me`
+
 `GET /v1/auth/logout`
+
+**User routes**
+
+`GET /v1/users`
+
+`GET /v1/users/:id`
+
+`POST /v1/users` - _body:_ `{ email: string, password: string }`
+
+`PUT /v1/users/:id` - _body:_ `{ email: string, password: string }`
+
+`DELETE /v1/users/:id`
+
+**Right routes**
+
+`GET /v1/rights`
+
+`GET /v1/rights/:id`
+
+`POST /v1/rights` - _body:_ `{ name: string, description?: string }`
+
+`PUT /v1/rights/:id` - _body:_ `{ name: string, description?: string }`
+
+`DELETE /v1/rights/:id`
+
+**Role routes**
+
+`GET /v1/roles`
+
+`GET /v1/roles/:id`
+
+`POST /v1/roles` - _body:_ `{ name: string, description?: string, rights?: ObjectId[] }`
+
+`PUT /v1/roles/:id` - _body:_ `{ name: string, description?: string, rights?: ObjectId[] }`
+
+`DELETE /v1/roles/:id`

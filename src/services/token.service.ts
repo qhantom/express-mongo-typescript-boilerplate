@@ -1,15 +1,23 @@
 import jwt from 'jsonwebtoken'
 import { addHours } from 'date-fns'
 
-import { Token, User } from '../models'
 import { config } from '../configs'
-import { tokenTypes, userTypes } from '../types'
+
+import { Token, User } from '../models'
+
+import {
+  BearerToken,
+  Payload,
+  TokenResponse,
+  TokenDocument,
+} from '../types/token.type'
+import { UserDocument, UserEmail } from '../types/user.type'
 
 async function invalidateToken(
-  email: userTypes.UserEmail,
-  token: tokenTypes.BearerToken,
+  email: UserEmail,
+  token: BearerToken,
   expirationDate: Date,
-): Promise<tokenTypes.TokenDocument> {
+): Promise<TokenDocument> {
   const user = await User.findOne({ email })
 
   return Token.create({
@@ -19,22 +27,20 @@ async function invalidateToken(
   })
 }
 
-function findToken(token: tokenTypes.BearerToken) {
+function findToken(token: BearerToken) {
   return Token.findOne({
     token,
   })
 }
 
-async function createToken(
-  user: userTypes.UserDocument,
-): Promise<tokenTypes.TokenResponse> {
+async function createToken(user: UserDocument): Promise<TokenResponse> {
   const expirationDate: Date = addHours(
     new Date(),
     Number(config.jwt.expirationHours),
   )
 
-  const payload: tokenTypes.Payload = {
-    sub: user._id,
+  const payload: Payload = {
+    sub: user.email,
     iat: Math.floor(Date.now() / 1000),
     exp:
       Math.floor(Date.now() / 1000) +
@@ -42,7 +48,7 @@ async function createToken(
     issuer: config.jwt.issuer,
   }
 
-  const token: tokenTypes.BearerToken = jwt.sign(payload, config.jwt.secret)
+  const token: BearerToken = jwt.sign(payload, config.jwt.secret)
 
   return {
     token,

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "USER_CREATE",
+    "description": "USER_CREATE"
+  },
+  {
+    "name": "USER_READ",
+    "description": "USER_READ"
+  },
+  {
+    "name": "USER_UPDATE",
+    "description": "USER_UPDATE"
+  },
+  {
+    "name": "USER_DELETE",
+    "description": "USER_DELETE"
+  },
+  {
+    "name": "ROLE_CREATE",
+    "description": "ROLE_CREATE"
+  },
+  {
+    "name": "ROLE_READ",
+    "description": "ROLE_READ"
+  },
+  {
+    "name": "ROLE_UPDATE",
+    "description": "ROLE_UPDATE"
+  },
+  {
+    "name": "ROLE_DELETE",
+    "description": "ROLE_DELETE"
+  },
+  {
+    "name": "RIGHT_CREATE",
+    "description": "RIGHT_CREATE"
+  },
+  {
+    "name": "RIGHT_READ",
+    "description": "RIGHT_READ"
+  },
+  {
+    "name": "RIGHT_UPDATE",
+    "description": "RIGHT_UPDATE"
+  },
+  {
+    "name": "RIGHT_DELETE",
+    "description": "RIGHT_DELETE"
+  }
+]

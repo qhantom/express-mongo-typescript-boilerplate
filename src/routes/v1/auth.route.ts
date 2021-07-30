@@ -7,6 +7,7 @@ import {
   registerValidator,
   loginValidator,
 } from '../../middlewares'
+
 import { authController } from '../../controllers'
 
 const router: Router = express.Router()
@@ -24,6 +25,8 @@ router.post(
   validate,
   asyncHandler(authController.login),
 )
+
+router.get('/me', isAuthenticated, asyncHandler(authController.me))
 
 router.get('/logout', isAuthenticated, asyncHandler(authController.logout))
 
