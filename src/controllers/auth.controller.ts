@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express'
 
 import { authService } from '../services'
@@ -13,9 +12,13 @@ async function login(req: Request, res: Response, next: NextFunction) {
   res.status(200).json(tokenResponse)
 }
 
+async function me(req: Request, res: Response, next: NextFunction) {
+  res.status(200).json(req.user)
+}
+
 async function logout(req: Request, res: Response, next: NextFunction) {
   await authService.logout(req.headers.authorization)
   res.status(200).send()
 }
 
-export { register, login, logout }
+export { register, login, logout, me }
