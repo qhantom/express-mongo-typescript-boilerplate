@@ -1,13 +1,13 @@
 import { Schema, model, Model } from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-import { userTypes } from '../types'
+import { UserEmail, UserPassword, UserDocument } from '../types/user.type'
 
-interface IUser extends Model<userTypes.UserDocument> {
-  doesEmailExist: (email: userTypes.UserEmail) => Promise<boolean>
+interface IUser extends Model<UserDocument> {
+  doesEmailExist: (email: UserEmail) => Promise<boolean>
 }
 
-const userSchema: Schema<userTypes.UserDocument> = new Schema(
+const userSchema: Schema<UserDocument> = new Schema(
   {
     email: {
       type: Schema.Types.String,
@@ -21,6 +21,11 @@ const userSchema: Schema<userTypes.UserDocument> = new Schema(
       required: true,
       trim: true,
     },
+    role: {
+      type: Schema.Types.ObjectId,
+      ref: 'Role',
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -29,7 +34,7 @@ const userSchema: Schema<userTypes.UserDocument> = new Schema(
 
 /* eslint-disable-next-line func-names */
 userSchema.statics.doesEmailExist = async function (
-  email: userTypes.UserEmail,
+  email: UserEmail,
 ): Promise<boolean> {
   const user = await this.findOne({ email })
   return Boolean(user)
@@ -37,7 +42,7 @@ userSchema.statics.doesEmailExist = async function (
 
 /* eslint-disable-next-line func-names */
 userSchema.methods.doesPasswordMatch = async function (
-  password: userTypes.UserPassword,
+  password: UserPassword,
 ): Promise<boolean> {
   const user = this
 
@@ -54,6 +59,6 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-const User: IUser = model<userTypes.UserDocument, IUser>('User', userSchema)
+const User: IUser = model<UserDocument, IUser>('User', userSchema)
 
 export { User }
