@@ -1,6 +1,6 @@
 {
   "name": "express-mongo-typescript-boilerplate",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A production-ready boilerplate based on Node.js, Express and MongoDB (using Mongoose ODM) written in TypeScript.",
   "main": "index.js",
   "scripts": {
