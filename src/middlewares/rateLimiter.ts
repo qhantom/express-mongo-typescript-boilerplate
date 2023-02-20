@@ -1,6 +1,6 @@
-import rateLimiter, { RateLimit } from 'express-rate-limit'
+import rateLimiter, { RateLimitRequestHandler } from 'express-rate-limit'
 
-const generalRateLimiter: RateLimit = rateLimiter({
+const generalRateLimiter: RateLimitRequestHandler = rateLimiter({
   windowMs: 1000 * 60 * 15, // 15 min
   max: 100,
 })

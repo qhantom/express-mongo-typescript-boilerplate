@@ -4,7 +4,7 @@ import { Role } from '../models'
 
 import { Role as IRole } from '../types/role.type'
 
-function doesRoleExist(name: string): Promise<boolean> {
+function doesRoleExist(name: string): ReturnType<typeof Role.exists> {
   return Role.exists({ name })
 }
 

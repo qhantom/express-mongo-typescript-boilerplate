@@ -5,11 +5,6 @@ const config = {
   },
   database: {
     URI: process.env.DATABASE_URI,
-    options: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    },
   },
   jwt: {
     issuer: process.env.JWT_ISSUER,

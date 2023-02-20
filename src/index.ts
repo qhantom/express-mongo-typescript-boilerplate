@@ -1,5 +1,5 @@
 import http from 'http'
-import mongoose, { NativeError } from 'mongoose'
+import mongoose, { Error } from 'mongoose'
 
 import { app } from './app'
 
@@ -34,19 +34,15 @@ function connectDatabase(): Promise<void> {
   logger.info(`Connecting to database`)
 
   return new Promise((resolve, reject) => {
-    mongoose.connect(
-      config.database.URI,
-      config.database.options,
-      (error: NativeError) => {
-        if (error) {
-          logger.error(`Database Error: ${error}`)
-          reject(error)
-        } else {
-          logger.info('Database connected')
-          resolve(undefined)
-        }
-      },
-    )
+    mongoose.connect(config.database.URI, (error: Error) => {
+      if (error) {
+        logger.error(`Database Error: ${error}`)
+        reject(error)
+      } else {
+        logger.info('Database connected')
+        resolve(undefined)
+      }
+    })
 
     if (config.environment === 'development') {
       mongoose.set('debug', true)

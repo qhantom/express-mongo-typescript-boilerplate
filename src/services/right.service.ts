@@ -4,7 +4,7 @@ import { Right } from '../models'
 
 import { Right as IRight } from '../types/right.type'
 
-function doesRightExist(name: string): Promise<boolean> {
+function doesRightExist(name: string): ReturnType<typeof Right.exists> {
   return Right.exists({ name })
 }
 
